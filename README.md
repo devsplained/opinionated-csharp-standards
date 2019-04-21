@@ -273,64 +273,64 @@ namespace Some.Example.Code
   {
     // consts
     private const string LAYOUT_EXAMPLE_STRING = "ThisIsAString";    
-	
-	// fields   
-	private ICompanyObject _companyObject;    
-	
-	// properties   
-	public ISomeObject   
-	{    
-	  get 
-	  { 
-	    return _someObject; 
-	  }   
-	}    
-	
-	public string SomeCode { get; set; }  
-	
+    
+    // fields   
+    private ICompanyObject _companyObject;    
+    
+    // properties   
+    public ISomeObject   
+    {    
+      get 
+      { 
+        return _someObject; 
+      }   
+    }    
+    
+    public string SomeCode { get; set; }  
+    
     // delegates
-	
+    
     // events
-	
+    
     // constructor(s) - with dependency injection, you shouldn't need more than one.
-	public LayoutExample(    
-	  ISomeObject someObject
-	)
-	{
-	  _someObject = someObject;
-	}
+    public LayoutExample(    
+      ISomeObject someObject
+    )
+    {
+      _someObject = someObject;
+    }
  
     // finalizers
-	public ~LayoutExample() {}
+    public ~LayoutExample() {}
  
     // indexers
-	
+    
     // methods   
-	public void PublicMethod()   
-	{
+    public void PublicMethod()   
+    {
       InternalMethod();
     }    
-	
-	internal void InternalMethod()   
-	{
+    
+    internal void InternalMethod()   
+    {
       ProtectedInternalMethod();
     }  
-	
+    
     protected internal void ProtectedInternalMethod()   
-	{    
-	  ProtectedMethod();
+    {    
+      ProtectedMethod();
     }  
-	
+    
     protected void ProtectedMethod()   
-	{    
-	  PrivateMethod();
+    {    
+      PrivateMethod();
     }    
-	
-	private void PrivateMethod()   
-	{
+    
+    private void PrivateMethod()   
+    {
       _someObject.MakeEverythingAwesome(LAYOUT_EXAMPLE_STRING);
     }
-	
+    
   }
 }
 ```
