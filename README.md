@@ -25,35 +25,35 @@ This is an opinionated C# standards/best practices guide. The purpose is to prov
 ### Indention
 Indention should always be done via tabs, not spaces. (Your Visual Studio / Tools / Options / Text Editor / C# / Tabs setting should be set to Kee p tabs, not Insert spaces.)
 
-* Why?: Although tab settings are an eternal religious debate among developers, tabs represent in one character what is otherwise represented as 4 or more characters. Using tabs also allows indentation to remain consistent regardless of the tab size. Tab size = 4
-* Why?: This helps avoid whitespace conflicts during commits and it keeps the code consistently readable throughout.
+> Why?: Although tab settings are an eternal religious debate among developers, tabs represent in one character what is otherwise represented as 4 or more characters. Using tabs also allows indentation to remain consistent regardless of the tab size. Tab size = 4
+> Why?: This helps avoid whitespace conflicts during commits and it keeps the code consistently readable throughout.
 
 You may sometimes see a gray bar at the top of a source file in Visual Studio, stating "You have mixed tabs and spaces. Fix this?" Use the "Tabify" button to convert all leading space indentations to tabs. Note, however, that this will mark all affected lines in the file as changed, when it comes to code review
 
 ### Block Statements
 Brackets need to be on their own line
 
-* Why?: This makes it completely obvious that the brackets relate to the block scope. Not only does this improve maintainability and readability, this also helps keep code looking consistent thoughtout. Without this standard, code layout could look different and it can be jarring for a reader to have to switch styles.
+> Why?: This makes it completely obvious that the brackets relate to the block scope. Not only does this improve maintainability and readability, this also helps keep code looking consistent thoughtout. Without this standard, code layout could look different and it can be jarring for a reader to have to switch styles.
 
 Bad: The author thought this line of code would run inside the if, but it won't.
-```c
+```csharp
 if (i == 10) j++;  
   return j - i; 
 ```
 Not much better
-```c
+```csharp
 if (i == 10) { j++; }  
   return j - i;
 ```
 This now runs inside the if block, when it wasn't expected to.
-```c
+```csharp
 if (i == 10)     
   // j++; 
 return j - i;
 ```
 
 Good:
-```c
+```csharp
 if (i == 10) 
 {  
   j++;   
@@ -61,12 +61,12 @@ if (i == 10)
 }
 ```
 
->Note: Although this isn't a C/C++ guide, the maintainers of GCC are adding a compiler flag in GCC 6 to warn about misleading indentation such as the scenario that resulted in Apple iOS and OSX devices accepting invalid certificates. It has been enough of an issue across the industry - leading in some cases to multi-million dollar bugs - that they see value in warning developers against writing code that fits this pattern.
+> Note: Although this isn't a C/C++ guide, the maintainers of GCC are adding a compiler flag in GCC 6 to warn about misleading indentation such as the scenario that resulted in Apple iOS and OSX devices accepting invalid certificates. It has been enough of an issue across the industry - leading in some cases to multi-million dollar bugs - that they see value in warning developers against writing code that fits this pattern.
 
 ### Properties
 If a property has any logic within it, brackets need to be on their own line.
 
-```c
+```csharp
 public string MyPaddedString {  
   get {   
     return GetMyString()    
@@ -78,16 +78,16 @@ public string MyPaddedString {
 
 Auto-properties should be on one line.
 
-```c
+```csharp
 public string MyString { get; set; }
 ```
 
 ### Parentheses
 Remove redundant parentheses on object initializers.
 
-* Why?: They clutter the code without providing any useful information.
+> Why?: They clutter the code without providing any useful information.
 
-```c
+```csharp
 var myValue = new Value() {
  NestedValue = "1",
  Code = "123"
@@ -95,7 +95,7 @@ var myValue = new Value() {
 ```
 
 Parens are not necessary here 
-```c
+```csharp
 var myValue = new Value {
  NestedValue = "1",
  Code = "123"
@@ -106,15 +106,15 @@ var myValue = new Value {
 ### Classes
 Refrain from using generic words for class names such as helper, utility, object, etc.
 
-* Why?: Class names should indicate the function the class is serving. Prepending or appending these words don't add value in describing what the class is doing.
+> Why?: Class names should indicate the function the class is serving. Prepending or appending these words don't add value in describing what the class is doing.
 
 ### Methods
 Methods should always be in pascal case i.e. MyMethod
 
 Methods should be appropriately named based on what operation it is performing.
 
-* Why?: Consistent naming conventions improve code readability. Safe assumptions can be made to save time if the method is name appropriately and actually does what it claims to do.
-* Why?: If a method name contains multiple verbs, this is a sign that it may be doing too much and should be refactored.
+> Why?: Consistent naming conventions improve code readability. Safe assumptions can be made to save time if the method is name appropriately and actually does what it claims to do.
+> Why?: If a method name contains multiple verbs, this is a sign that it may be doing too much and should be refactored.
 
 | Operation | Convention | Examples(s) |
 | ------ | ------ | ------ |
@@ -128,7 +128,7 @@ Methods should be appropriately named based on what operation it is performing.
 
 Methods whose names start with 'Get' should return a value.
 
-* Why?: A method whose name starts with 'Get' implies that it returns a value. A void method does not return a value. Therefore, these methods should not be void
+> Why?: A method whose name starts with 'Get' implies that it returns a value. A void method does not return a value. Therefore, these methods should not be void
 
 ### Properties
 Properties should always be in pascal case i.e. MyProperty
@@ -140,7 +140,7 @@ Parameters and method level variables should be camel case, but not start with a
 
 Do not use abbreviations for your variables unless they are company/industry standard acceptable abbreviations.
 
-* Why?: We don't get points (or faster code) for using shorter variable names. Make sure your variable names are clear as to what they contain. Abbreviations might work for you, but might be confusing for a reader.
+> Why?: We don't get points (or faster code) for using shorter variable names. Make sure your variable names are clear as to what they contain. Abbreviations might work for you, but might be confusing for a reader.
 
 ***No Hungarian Notation!!!***
 
@@ -151,7 +151,7 @@ Constants should be in upper case with underscores, i.e. MY_CONSTANT.
 ### Nameof Expression
 C# 6 now has a new expression called nameof which can be used like this:
 
-```c
+```csharp
 if (x == null) {
  throw new ArgumentNullException(nameof(x));
 }
@@ -188,10 +188,10 @@ public string AwesomeThing { get; set; }
 ```
 
 Unless you have a compelling reason otherwise, prefer the auto-property syntax.
-* Why?: Code is less cluttered and easier to read/understand.
+> Why?: Code is less cluttered and easier to read/understand.
 Model classes returned by the API or passed between data/business/API layers must use auto-property syntax.
-* Why?: These classes are not unit tested directly, so logic may not be fully tested.
-* Why?: Logic should be implemented in the business layer or as part of mapping between layers, not in the objects themselves.
+> Why?: These classes are not unit tested directly, so logic may not be fully tested.
+> Why?: Logic should be implemented in the business layer or as part of mapping between layers, not in the objects themselves.
 
 ### Auto Property Default Values
 C# 6 now allows syntax for defining default values to auto properties. This can simplify setting defaults and it will move it out of the constructor. These are fine to use, but we should not abuse these and just set defaults for everything. For example, the .net default value for a string should suffice, you should not be setting your defaults to String.Empty or setting your int defaults to something like -1 unless you really depend on those defaults. Try to rely on the .net defaults as much as possible.
@@ -204,7 +204,7 @@ public string GetterOnly { get; } = "You're stuck with me";
 
 > Note: This actually creates a readonly property behind the scenes, so you can still change this in your constructor, but not outside of it.
 
-* Why?: Using auto property default values can clean up a constructor and possibly even remove the need for it.
+> Why?: Using auto property default values can clean up a constructor and possibly even remove the need for it.
 
 ## Code Ordering
 ### Main Outline
@@ -355,7 +355,7 @@ var person = new Person {
 ```
 
 Objects can be initialized on a single line if only 2-3 properties are being initialized. When initializing any more than that, place the brackets and properties on new lines.
-* Why?: Typically it is good to keep lines less than 120 characters long, If a line is too long, it would require the reader to use the horizontal scrollbar which can easily interrupt the flow of reading the code. This also allows the addition, modification, or removal of properties from the initializer with fewer merge conflicts in Git.
+> Why?: Typically it is good to keep lines less than 120 characters long, If a line is too long, it would require the reader to use the horizontal scrollbar which can easily interrupt the flow of reading the code. This also allows the addition, modification, or removal of properties from the initializer with fewer merge conflicts in Git.
 
 ### Index Initializers
 In C# 6, Microsoft provided an extension to object initializers that allows index initialization. A common use for this would be for creating Json objects declaratively in one expression, rather than having to first create the object and then assign into it in separate statements.
@@ -382,7 +382,7 @@ var numericExample = new Dictionary<int, string>
 ```
 
 Objects can be initialized on a single line if only 2-3 properties are being initialized. When initializing any more than that, place the brackets and properties on new lines.
-* Why?: Typically it is good to keep lines less than 120 characters long, If a line is too long, it would require the reader to use the horizontal scrollbar which can easily interrupt the flow of reading the code. This also allows the addition, modification, or removal of properties from the initializer with fewer merge conflicts in Git.
+> Why?: Typically it is good to keep lines less than 120 characters long, If a line is too long, it would require the reader to use the horizontal scrollbar which can easily interrupt the flow of reading the code. This also allows the addition, modification, or removal of properties from the initializer with fewer merge conflicts in Git.
 
 ### Be Mindful of Unit Testing 
 Bad 
@@ -407,7 +407,8 @@ internal MyClass(IRepository repository)
   _repository = repository;
 }  
 
-// In this case, a unit test would inject a mock repository. Now when it runs, it will not actually delete all of the employees. 
+// In this case, a unit test would inject a mock repository. 
+// Now when it runs, it will not actually delete all of the employees. 
 public void DeleteAllEmployees() 
 {
   _repository.DeleteAllEmployees(); 
@@ -423,7 +424,8 @@ public MyClass(IRepository repository)  {
  _repository = repository;
 }  
 
-// For unit testing, inject a mock repository and assert that the correct repository method is called.
+// For unit testing, inject a mock repository and assert that the correct 
+// repository method is called.
 public void DeleteAllEmployees() {
   _repository.DeleteAllEmployees(); 
 }
@@ -451,7 +453,7 @@ public class Program
 } 
 ```
 Avoid this usage at all costs!!!
-* Why?: It hides code and it causes problems when unit testing.
+> Why?: It hides code and it causes problems when unit testing.
 
 ### Alias Usage
 ```csharp
@@ -482,12 +484,12 @@ public string Username(userId) => _repository.FindOne(
 ```
 
 These can really clean up code when used correctly, but they should not be very complex.
-* Why?: Because of this new syntax, you might want to start making everything one-liners. The problem here is that it can become cumbersome to read. The Unaccepted use example above works, but its doing too much. Think about the single responsibility principle here.
+> Why?: Because of this new syntax, you might want to start making everything one-liners. The problem here is that it can become cumbersome to read. The Unaccepted use example above works, but its doing too much. Think about the single responsibility principle here.
 
 ### Methods Signatures
 #### Too Many Parameters
 Try to keep method signatures under 4 parameters. If you find yourself using 4 or more parameters, consider grouping the parameters into a class.
-* Why?: According to the book Clean Code, anything over 4 parameters is mentally tasking to understand. Keeping parameter signatures simple and small helps a reader quickly understand what that method might actually do.
+> Why?: According to the book Clean Code, anything over 4 parameters is mentally tasking to understand. Keeping parameter signatures simple and small helps a reader quickly understand what that method might actually do.
 
 #### Optional Parameters
 Optional parameters can be a little difficult to quickly understand when walking through code, so here are some guidelines for usage:
@@ -506,12 +508,14 @@ Avoid using out parameters unless they are 100% needed. For the most part, you c
 String Interpolation should be used in place of String.Format.
 Preferred
 ```csharp
-string messageInterpolated = $"Hello!  My name is {person.FirstName} {person.LastName} and I am {person.Age} years old.";
+string messageInterpolated = $"Hello!  My name is {person.FirstName} {person.LastName} " + 
+  "and I am {person.Age} years old.";
 ```
 
 Use when it makes sense
 ```csharp
-string message = string.Format("Hello!  My name is {0} {1} and I am {2} years old.", person.FirstName, person.LastName, person.Age);
+string message = string.Format("Hello!  My name is {0} {1} and I am {2} years old.", 
+  person.FirstName, person.LastName, person.Age);
 ```
 > Why?: The string will be easier to read in code.
 
@@ -587,6 +591,7 @@ catch (Exception ex)
 ## Operators
 ### Null-Conditional Operator
 C# 6 introduces a great new way to do null checking.
+
 Good
 ```
 if(user?.name?.first === "John") { }
@@ -634,12 +639,15 @@ for (var i = 0; i < 10; i++) { } // for loops
 foreach (var file in _ioFactory.GetFiles("my/directory") { } // foreach loops 
 
 using (var file = _ioFactory.GetFile("my/path")) { } // using statements  
+```
 
 Bad
 ```csharp
-var item = ProcessItem(); // ProcessItem doesn't clearly indicate what it is returning 
+// ProcessItem doesn't clearly indicate what it is returning 
+var item = ProcessItem(); 
 
-var individuals = GetContacts(ContactTypes.Individuals); // Contacts is actually be returned. Individual is not a type.
+// Contacts is actually be returned. Individual is not a type.
+var individuals = GetContacts(ContactTypes.Individuals); 
 ```
 
 Remember that code readability is paramount and knowing data types is important when reading code.
@@ -656,8 +664,8 @@ public class SelectQueryBase<TFilter, TResult> where TFilter : FilterBase where 
 ```
 > Why?: Anyone who calls your generic class should know what it expects and what it will do, based on the generic types it accepts.
 
-### Prefer delegate over Func<> for method pointers
-When passing a function pointer to another method, declare a delegate with the appropriate signature rather than defining a parameter of a Fun c<> or Action<> type.
+### Prefer `delegate` over `Func<>` for method pointers
+When passing a function pointer to another method, declare a delegate with the appropriate signature rather than defining a parameter of a `Func<>` or `Action<>` type.
 Why?: The parameters of a delegate can be named so that they express intent.
 ```csharp
 public delegate bool MakeItSoMethod(string commandFrom, string commandTo, string command);  
@@ -668,7 +676,8 @@ public bool DoCaptainStuff(MakeItSoMethod myMethod)
   return myMethod("Picard", "Riker", "take the helm"); 
 }  
 
-// Anyone maintaining this method has absolutely no idea what this method will actually do with its parameters.
+// Anyone maintaining this method has absolutely no idea what this method will 
+// actually do with its parameters.
 public bool DoCaptainStuff2(
   Func<string, string, string, bool> myMethod2
 ) 
@@ -778,12 +787,12 @@ Use XDocument over XmlDocument
 Logging is an important part of app monitoring and tooling. Remember that other people use logging beyond just developers. When logging, always ask the questions, "Am I using the right category?" and "Is this useful to anyone else?".
 
 ### Logging Categories
-* DEBUG: Only used when debugging, usually very verbose
-* INFO: Used to indicated something started, or something got deleted, etc 
+* `DEBUG`: Only used when debugging, usually very verbose
+* `INFO`: Used to indicated something started, or something got deleted, etc 
 * * This can also be used by monitoring programs such as Splunk. When logging, try to think about what information would be good for a monitoring program.
-* WARN: Something happened but we are still going to move on with the program flow
-* ERROR: Something bad happened and we probably stop or change program workflow
-* FATAL: Oh crap! Oh crap!!! Totally did not expect this to happen! Yeah....we are going to shutdown the program here...
+* `WARN`: Something happened but we are still going to move on with the program flow
+* `ERROR`: Something bad happened and we probably stop or change program workflow
+* `FATAL`: Oh crap! Oh crap!!! Totally did not expect this to happen! Yeah....we are going to shutdown the program here...
 
 ## Unit Testing
 Just do it
@@ -900,14 +909,15 @@ Examples could include:
 * Finding some string being written like this:
 
 ```csharp
-_logger.WriteError("The file, " + fileName + " was only" + fileSize + " bytes, which was below our minimum requirement of " + MIN_FILE_SIZE
-+ " bytes!");
+_logger.WriteError("The file, " + fileName + " was only" + fileSize + 
+  " bytes, which was below our minimum requirement of " + MIN_FILE_SIZE +
+  " bytes!");
 ```
 
 If you were to be in some code that looked like the line above, you could easily clean this up by changing it to look like the line below:
-
 ```csharp
-_logger.WriteError($"The file, {fileName} was only {fileSize} bytes, which was below our minimum requirement of {MIN_FILE_SIZE} bytes!");
+_logger.WriteError($"The file, {fileName} was only {fileSize} bytes, which " + 
+  "was below our minimum requirement of {MIN_FILE_SIZE} bytes!");
 ```
 
 License
